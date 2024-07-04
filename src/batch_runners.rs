@@ -14,7 +14,7 @@ fn basic_runner_wrapper<F>(
     transformer::transform_image(source_image, output_size_option, |point| {
         transformation(point)
     })
-    .save(&format!("output/circle_{}_mapping.png", mapping_name))
+    .save(&format!("output/{}.png", mapping_name))
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
@@ -30,7 +30,7 @@ fn tertiary_runner_wrapper<F>(
     transformer::transform_image(source_image, output_size_option, |point| {
         transformation(point, tertiary_value)
     })
-    .save(&format!("output/circle_{}_mapping.png", mapping_name))
+    .save(&format!("output/{}.png", mapping_name))
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
@@ -47,7 +47,7 @@ fn quaternary_runner_wrapper<F>(
     transformer::transform_image(source_image, output_size_option, |point| {
         transformation(point, tertiary_value, quaternary_value)
     })
-    .save(&format!("output/circle_{}_mapping.png", mapping_name))
+    .save(&format!("output/{}.png", mapping_name))
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
@@ -61,49 +61,49 @@ pub fn run_all_circle_to_square(
 
     //FG-Squircular Tertiary
     tertiary_runner_wrapper(
-        "power2_0.01",
+        "circle_power2_B0.01_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::power2,
         0.01,
     );
     tertiary_runner_wrapper(
-        "power2_0.25",
+        "circle_power2_B0.25_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::power2,
         0.25,
     );
     tertiary_runner_wrapper(
-        "power2_0.33",
+        "circle_power2_B0.33_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::power2,
         0.33,
     );
     tertiary_runner_wrapper(
-        "power2_0.50",
+        "circle_power2_B0.50_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::power2,
         0.50,
     );
     tertiary_runner_wrapper(
-        "power2_0.66",
+        "circle_power2_B0.66_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::power2,
         0.66,
     );
     tertiary_runner_wrapper(
-        "power2_0.75",
+        "circle_power2_B0.75_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::power2,
         0.75,
     );
     tertiary_runner_wrapper(
-        "power2_0.99",
+        "circle_power2_B0.99_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::power2,
@@ -114,7 +114,7 @@ pub fn run_all_circle_to_square(
 
     //Elliptical Grid
     basic_runner_wrapper(
-        "elliptical_grid",
+        "elliptical_grid_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::elliptical_grid,
