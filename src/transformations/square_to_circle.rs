@@ -58,14 +58,14 @@ pub fn lame(point: transformer::Point) -> transformer::Point {
     return transformer::Point {
         x: ((x / f64::sqrt(x2 + y2))
             * f64::powf(
-                absx * (2.0 / ((1.0 - absx) * (1.0 - absy)))
-                    + absy * (2.0 / ((1.0 - absx) * (1.0 - absy))),
+                f64::powf(absx, 2.0 / ((1.0 - absx) * (1.0 - absy)))
+                    + f64::powf(absy, 2.0 / ((1.0 - absx) * (1.0 - absy))),
                 0.5 * (1.0 - absx) * (1.0 - absy),
             )),
         y: ((y / f64::sqrt(x2 + y2))
             * f64::powf(
-                absx * (2.0 / ((1.0 - absx) * (1.0 - absy)))
-                    + absy * (2.0 / ((1.0 - absx) * (1.0 - absy))),
+                f64::powf(absx, 2.0 / ((1.0 - absx) * (1.0 - absy)))
+                    + f64::powf(absy, 2.0 / ((1.0 - absx) * (1.0 - absy))),
                 0.5 * (1.0 - absx) * (1.0 - absy),
             )),
     };
