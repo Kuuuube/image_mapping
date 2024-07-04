@@ -51,7 +51,7 @@ fn quaternary_runner_wrapper<F>(
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
-pub fn run_all_circle_to_square(
+pub fn run_all_square_to_circle(
     source_image: image::DynamicImage,
     output_size_option: Option<Size>,
 ) {
@@ -142,7 +142,7 @@ pub fn run_all_circle_to_square(
     //p-Norm Squircular
 }
 
-pub fn run_all_square_to_circle(
+pub fn run_all_circle_to_square(
     source_image: image::DynamicImage,
     output_size_option: Option<Size>,
 ) {
