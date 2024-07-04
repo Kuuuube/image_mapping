@@ -1,0 +1,153 @@
+use crate::{
+    transformations,
+    transformer::{self, Point, Size},
+};
+
+fn basic_runner_wrapper<F>(
+    mapping_name: &str,
+    source_image: image::DynamicImage,
+    output_size_option: Option<Size>,
+    mut transformation: F,
+) where
+    F: FnMut(Point) -> Point,
+{
+    transformer::transform_image(source_image, output_size_option, |point| transformation(point))
+        .save(&format!("output/circle_{}_mapping.png", mapping_name))
+        .expect(&format!("Failed to generate {}", mapping_name));
+}
+
+fn tertiary_runner_wrapper<F>(
+    mapping_name: &str,
+    source_image: image::DynamicImage,
+    output_size_option: Option<Size>,
+    mut transformation: F,
+    tertiary_value: f64,
+) where
+    F: FnMut(Point, f64) -> Point,
+{
+    transformer::transform_image(source_image, output_size_option, |point| {
+        transformation(point, tertiary_value)
+    })
+    .save(&format!("output/circle_{}_mapping.png", mapping_name))
+    .expect(&format!("Failed to generate {}", mapping_name));
+}
+
+fn quaternary_runner_wrapper<F>(
+    mapping_name: &str,
+    source_image: image::DynamicImage,
+    output_size_option: Option<Size>,
+    mut transformation: F,
+    tertiary_value: f64,
+    quaternary_value: f64,
+) where
+    F: FnMut(Point, f64, f64) -> Point,
+{
+    transformer::transform_image(source_image, output_size_option, |point| {
+        transformation(point, tertiary_value, quaternary_value)
+    })
+    .save(&format!("output/circle_{}_mapping.png", mapping_name))
+    .expect(&format!("Failed to generate {}", mapping_name));
+}
+
+pub fn run_all_circle_to_square(source_image: image::DynamicImage, output_size_option: Option<Size>) {
+    //FG-Squircular
+
+    //FG-Squircular Secondary
+
+    //FG-Squircular Tertiary
+    tertiary_runner_wrapper(
+        "power2_0.01",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::power2,
+        0.01,
+    );
+    tertiary_runner_wrapper(
+        "power2_0.25",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::power2,
+        0.25,
+    );
+    tertiary_runner_wrapper(
+        "power2_0.33",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::power2,
+        0.33,
+    );
+    tertiary_runner_wrapper(
+        "power2_0.50",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::power2,
+        0.50,
+    );
+    tertiary_runner_wrapper(
+        "power2_0.66",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::power2,
+        0.66,
+    );
+    tertiary_runner_wrapper(
+        "power2_0.75",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::power2,
+        0.75,
+    );
+    tertiary_runner_wrapper(
+        "power2_0.99",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::power2,
+        0.99,
+    );
+
+    //FG-Squircular Quaternary
+
+    //Elliptical Grid
+    basic_runner_wrapper(
+        "elliptical_grid",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::elliptical_grid,
+    );
+
+    //Elliptical Grid Secondary
+
+    //Elliptical Grid Tertiary
+
+    //Simple Stretch
+
+    //Simple Stretch Secondary
+
+    //Lamé-based
+
+    //p-Norm Squircular
+}
+
+pub fn run_all_square_to_circle(source_image: image::DynamicImage, output_size_option: Option<Size>) {
+    //FG-Squircular
+
+    //FG-Squircular Secondary
+
+    //FG-Squircular Tertiary
+
+    //FG-Squircular Quaternary
+
+    //Elliptical Grid
+
+    //Elliptical Grid Secondary
+
+    //Elliptical Grid Tertiary
+
+    //Simple Stretch
+
+    //Simple Stretch Secondary
+
+    //Lamé-based
+
+    //p-Norm Squircular
+}

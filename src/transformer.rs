@@ -14,11 +14,11 @@ where
 
     let output_size = match output_size_option {
         Some(some) => some,
-        None => source_size.clone(),
+        None => source_size,
     };
 
     let mut output_image: image::ImageBuffer<image::Rgba<u8>, Vec<u8>> =
-        image::ImageBuffer::new(output_size.clone().width, output_size.clone().height);
+        image::ImageBuffer::new(output_size.width, output_size.height);
 
     for (x, y, rgba) in source_image.enumerate_pixels() {
         let unit_point = to_unit(
@@ -26,7 +26,7 @@ where
                 x: x.into(),
                 y: y.into(),
             },
-            source_size.clone(),
+            source_size,
         );
 
         let transformed_point = transformation(unit_point);
@@ -39,7 +39,7 @@ where
             continue;
         }
 
-        let real_point = from_unit(transformed_point, output_size.clone());
+        let real_point = from_unit(transformed_point, output_size);
 
         let output_pixel = output_image.get_pixel_mut(real_point.x, real_point.y);
         *output_pixel = rgba.clone();
@@ -62,17 +62,19 @@ fn from_unit(point: Point, output_size: Size) -> UPoint {
     };
 }
 
+#[derive(Clone, Copy)]
 pub struct Point {
     pub x: f64,
     pub y: f64,
 }
 
+#[derive(Clone, Copy)]
 struct UPoint {
     x: u32,
     y: u32,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct Size {
     pub width: u32,
     pub height: u32,
