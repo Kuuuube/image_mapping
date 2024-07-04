@@ -11,9 +11,11 @@ fn basic_runner_wrapper<F>(
 ) where
     F: FnMut(Point) -> Point,
 {
-    transformer::transform_image(source_image, output_size_option, |point| transformation(point))
-        .save(&format!("output/circle_{}_mapping.png", mapping_name))
-        .expect(&format!("Failed to generate {}", mapping_name));
+    transformer::transform_image(source_image, output_size_option, |point| {
+        transformation(point)
+    })
+    .save(&format!("output/circle_{}_mapping.png", mapping_name))
+    .expect(&format!("Failed to generate {}", mapping_name));
 }
 
 fn tertiary_runner_wrapper<F>(
@@ -49,7 +51,10 @@ fn quaternary_runner_wrapper<F>(
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
-pub fn run_all_circle_to_square(source_image: image::DynamicImage, output_size_option: Option<Size>) {
+pub fn run_all_circle_to_square(
+    source_image: image::DynamicImage,
+    output_size_option: Option<Size>,
+) {
     //FG-Squircular
 
     //FG-Squircular Secondary
@@ -128,7 +133,10 @@ pub fn run_all_circle_to_square(source_image: image::DynamicImage, output_size_o
     //p-Norm Squircular
 }
 
-pub fn run_all_square_to_circle(source_image: image::DynamicImage, output_size_option: Option<Size>) {
+pub fn run_all_square_to_circle(
+    source_image: image::DynamicImage,
+    output_size_option: Option<Size>,
+) {
     //FG-Squircular
 
     //FG-Squircular Secondary
