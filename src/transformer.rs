@@ -14,7 +14,7 @@ where
 
     let output_size = match output_size_option {
         Some(some) => some,
-        None => source_size.clone()
+        None => source_size.clone(),
     };
 
     let mut output_image: image::ImageBuffer<image::Rgba<u8>, Vec<u8>> =
