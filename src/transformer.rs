@@ -1,6 +1,6 @@
 pub fn transform_image<F>(
     image: image::DynamicImage,
-    output_size: Size,
+    output_size_option: Option<Size>,
     mut transformation: F,
 ) -> image::ImageBuffer<image::Rgba<u8>, Vec<u8>>
 where
@@ -10,6 +10,11 @@ where
     let source_size = Size {
         width: source_image.width(),
         height: source_image.height(),
+    };
+
+    let output_size = match output_size_option {
+        Some(some) => some,
+        None => source_size.clone()
     };
 
     let mut output_image: image::ImageBuffer<image::Rgba<u8>, Vec<u8>> =
