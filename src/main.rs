@@ -44,7 +44,7 @@ where
 
         let (real_x, real_y) = (
             ((transformed_point.x + 1.0) / 2.0 * output_size.width as f64) as u32,
-            ((transformed_point.x + 1.0) / 2.0 * output_size.height as f64) as u32,
+            ((transformed_point.y + 1.0) / 2.0 * output_size.height as f64) as u32,
         );
 
         let output_pixel = output_image.get_pixel_mut(real_x, real_y);
