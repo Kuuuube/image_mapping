@@ -117,7 +117,7 @@ pub fn run_all_circle_to_square(
 
     //Elliptical Grid
     basic_runner_wrapper(
-        "elliptical_grid_mapping",
+        "circle_elliptical_grid_mapping",
         source_image.clone(),
         output_size_option,
         transformations::square_to_circle::elliptical_grid,
@@ -132,6 +132,12 @@ pub fn run_all_circle_to_square(
     //Simple Stretch Secondary
 
     //Lamé-based
+    basic_runner_wrapper(
+        "circle_lame-based",
+        source_image.clone(),
+        output_size_option,
+        transformations::square_to_circle::lame,
+    );
 
     //p-Norm Squircular
 }
@@ -159,6 +165,12 @@ pub fn run_all_square_to_circle(
     //Simple Stretch Secondary
 
     //Lamé-based
+    basic_runner_wrapper(
+        "square_lame-based",
+        source_image.clone(),
+        output_size_option,
+        transformations::circle_to_square::lame,
+    );
 
     //p-Norm Squircular
 }

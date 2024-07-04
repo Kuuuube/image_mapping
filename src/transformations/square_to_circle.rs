@@ -45,5 +45,30 @@ pub fn elliptical_grid(point: transformer::Point) -> transformer::Point {
 //Simple Stretch Secondary
 
 //Lamé-based
+pub fn lame(point: transformer::Point) -> transformer::Point {
+    let x = point.x;
+    let y = point.y;
+
+    let x2 = f64::powi(x, 2);
+    let y2 = f64::powi(y, 2);
+
+    let absx: f64 = f64::abs(x);
+    let absy = f64::abs(y);
+
+    return transformer::Point {
+        x: ((x / f64::sqrt(x2 + y2))
+            * f64::powf(
+                absx * (2.0 / ((1.0 - absx) * (1.0 - absy)))
+                    + absy * (2.0 / ((1.0 - absx) * (1.0 - absy))),
+                0.5 * (1.0 - absx) * (1.0 - absy),
+            )),
+        y: ((y / f64::sqrt(x2 + y2))
+            * f64::powf(
+                absx * (2.0 / ((1.0 - absx) * (1.0 - absy)))
+                    + absy * (2.0 / ((1.0 - absx) * (1.0 - absy))),
+                0.5 * (1.0 - absx) * (1.0 - absy),
+            )),
+    };
+}
 
 //p-Norm Squircular
