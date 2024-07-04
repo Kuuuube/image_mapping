@@ -1,5 +1,6 @@
 pub fn transform_image<F>(
     image: image::DynamicImage,
+    output_size: Size,
     mut transformation: F,
 ) -> image::ImageBuffer<image::Rgba<u8>, Vec<u8>>
 where
@@ -11,10 +12,6 @@ where
         height: source_image.height(),
     };
 
-    let output_size = Size {
-        width: 1000,
-        height: 1000,
-    };
     let mut output_image: image::ImageBuffer<image::Rgba<u8>, Vec<u8>> =
         image::ImageBuffer::new(output_size.clone().width, output_size.clone().height);
 
@@ -71,7 +68,7 @@ struct UPoint {
 }
 
 #[derive(Clone)]
-struct Size {
-    width: u32,
-    height: u32,
+pub struct Size {
+    pub width: u32,
+    pub height: u32,
 }
