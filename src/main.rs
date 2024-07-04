@@ -1,15 +1,19 @@
+use std::u32;
+
 fn main() {
     let source_image = image::open("source.png").unwrap();
-    let output_image = process_image(source_image);
+    let output_image = process_image(source_image, |point| point);
 
     output_image.save("output.png").unwrap();
 }
 
-fn transform(pixel_coords: Point) -> Point {
-    return pixel_coords;
-}
-
-fn process_image(image: image::DynamicImage) -> image::ImageBuffer<image::Rgba<u8>, Vec<u8>> {
+fn process_image<F>(
+    image: image::DynamicImage,
+    mut transformation: F,
+) -> image::ImageBuffer<image::Rgba<u8>, Vec<u8>>
+where
+    F: FnMut(Point) -> Point,
+{
     let source_image = image.into_rgba8();
     let source_size = Size {
         width: source_image.width(),
@@ -28,7 +32,7 @@ fn process_image(image: image::DynamicImage) -> image::ImageBuffer<image::Rgba<u
             x: x as f64 / source_size.width as f64 * 2.0 - 1.0,
             y: y as f64 / source_size.height as f64 * 2.0 - 1.0,
         };
-        let transformed_point = transform(unit_point);
+        let transformed_point = transformation(unit_point);
 
         if transformed_point.x > 1.0
             || transformed_point.x < -1.0
@@ -46,6 +50,7 @@ fn process_image(image: image::DynamicImage) -> image::ImageBuffer<image::Rgba<u
         let output_pixel = output_image.get_pixel_mut(real_x, real_y);
         *output_pixel = rgba.clone();
     }
+
     return output_image;
 }
 
