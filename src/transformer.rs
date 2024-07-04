@@ -41,6 +41,10 @@ where
 
         let real_point = from_unit(transformed_point, output_size);
 
+        if real_point.x >= output_size.width || real_point.y >= output_size.height {
+            continue;
+        }
+
         let output_pixel = output_image.get_pixel_mut(real_point.x, real_point.y);
         *output_pixel = rgba.clone();
     }
