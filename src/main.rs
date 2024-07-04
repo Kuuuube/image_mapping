@@ -2,6 +2,8 @@ mod transformer;
 mod transformations;
 
 fn main() {
+    let start_time = std::time::Instant::now();
+
     let source_image = image::open("source.png").unwrap();
     let output_image = transformer::transform_image(
         source_image,
@@ -12,4 +14,6 @@ fn main() {
     );
 
     output_image.save("output.png").unwrap();
+
+    println!("Generated in: {}ms", start_time.elapsed().as_millis());
 }
