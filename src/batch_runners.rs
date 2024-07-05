@@ -3,12 +3,15 @@ use crate::{
     transformer::{self, Point, Size},
 };
 
-fn basic_runner_wrapper<F>(
+fn basic_runner_wrapper<P, Container, F>(
     mapping_name: &str,
-    source_image: &image::ImageBuffer<image::Rgba<u8>, Vec<u8>>,
+    source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
     mut transformation: F,
 ) where
+    P: image::Pixel + image::PixelWithColorType,
+    [P::Subpixel]: image::EncodableLayout,
+    Container: std::ops::Deref<Target = [P::Subpixel]>,
     F: FnMut(Point) -> Point,
 {
     transformer::transform_image(source_image, output_size_option, |point| {
@@ -18,13 +21,16 @@ fn basic_runner_wrapper<F>(
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
-fn tertiary_runner_wrapper<F>(
+fn tertiary_runner_wrapper<P, Container, F>(
     mapping_name: &str,
-    source_image: &image::ImageBuffer<image::Rgba<u8>, Vec<u8>>,
+    source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
     mut transformation: F,
     tertiary_value: f64,
 ) where
+    P: image::Pixel + image::PixelWithColorType,
+    [P::Subpixel]: image::EncodableLayout,
+    Container: std::ops::Deref<Target = [P::Subpixel]>,
     F: FnMut(Point, f64) -> Point,
 {
     transformer::transform_image(source_image, output_size_option, |point| {
@@ -34,14 +40,17 @@ fn tertiary_runner_wrapper<F>(
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
-fn quaternary_runner_wrapper<F>(
+fn quaternary_runner_wrapper<P, Container, F>(
     mapping_name: &str,
-    source_image: &image::ImageBuffer<image::Rgba<u8>, Vec<u8>>,
+    source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
     mut transformation: F,
     tertiary_value: f64,
     quaternary_value: f64,
 ) where
+    P: image::Pixel + image::PixelWithColorType,
+    [P::Subpixel]: image::EncodableLayout,
+    Container: std::ops::Deref<Target = [P::Subpixel]>,
     F: FnMut(Point, f64, f64) -> Point,
 {
     transformer::transform_image(source_image, output_size_option, |point| {
@@ -51,10 +60,14 @@ fn quaternary_runner_wrapper<F>(
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
-pub fn run_all_square_to_circle(
-    source_image: &image::ImageBuffer<image::Rgba<u8>, Vec<u8>>,
+pub fn run_all_square_to_circle<P, Container>(
+    source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
-) {
+) where
+    P: image::Pixel + image::PixelWithColorType,
+    [P::Subpixel]: image::EncodableLayout,
+    Container: std::ops::Deref<Target = [P::Subpixel]>,
+{
     //FG-Squircular
 
     //FG-Squircular Secondary
@@ -142,10 +155,14 @@ pub fn run_all_square_to_circle(
     //p-Norm Squircular
 }
 
-pub fn run_all_circle_to_square(
-    source_image: &image::ImageBuffer<image::Rgba<u8>, Vec<u8>>,
+pub fn run_all_circle_to_square<P, Container>(
+    source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
-) {
+) where
+    P: image::Pixel + image::PixelWithColorType,
+    [P::Subpixel]: image::EncodableLayout,
+    Container: std::ops::Deref<Target = [P::Subpixel]>,
+{
     //FG-Squircular
 
     //FG-Squircular Secondary
@@ -175,10 +192,14 @@ pub fn run_all_circle_to_square(
     //p-Norm Squircular
 }
 
-pub fn run_all_half_face_superellipse(
-    source_image: &image::ImageBuffer<image::Rgba<u8>, Vec<u8>>,
+pub fn run_all_half_face_superellipse<P, Container>(
+    source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
-) {
+) where
+    P: image::Pixel + image::PixelWithColorType,
+    [P::Subpixel]: image::EncodableLayout,
+    Container: std::ops::Deref<Target = [P::Subpixel]>,
+{
     //FG-Squircular
 
     //FG-Squircular Secondary
