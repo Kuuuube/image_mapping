@@ -68,61 +68,21 @@ pub fn run_all_square_to_circle<P, Container>(
     [P::Subpixel]: image::EncodableLayout,
     Container: std::ops::Deref<Target = [P::Subpixel]>,
 {
+    let tertiary_steps = step_maker(100);
+
     //FG-Squircular
 
     //FG-Squircular Secondary
 
     //FG-Squircular Tertiary
     //Power2
-    {
+    for i in tertiary_steps {
         tertiary_runner_wrapper(
-            "circle_power2_B0.01_mapping",
+            &format!("circle_power2_{:.2}_mapping", i),
             source_image,
             output_size_option,
             transformations::square_to_circle::power2,
-            0.01,
-        );
-        tertiary_runner_wrapper(
-            "circle_power2_B0.25_mapping",
-            source_image,
-            output_size_option,
-            transformations::square_to_circle::power2,
-            0.25,
-        );
-        tertiary_runner_wrapper(
-            "circle_power2_B0.33_mapping",
-            source_image,
-            output_size_option,
-            transformations::square_to_circle::power2,
-            0.33,
-        );
-        tertiary_runner_wrapper(
-            "circle_power2_B0.50_mapping",
-            source_image,
-            output_size_option,
-            transformations::square_to_circle::power2,
-            0.50,
-        );
-        tertiary_runner_wrapper(
-            "circle_power2_B0.66_mapping",
-            source_image,
-            output_size_option,
-            transformations::square_to_circle::power2,
-            0.66,
-        );
-        tertiary_runner_wrapper(
-            "circle_power2_B0.75_mapping",
-            source_image,
-            output_size_option,
-            transformations::square_to_circle::power2,
-            0.75,
-        );
-        tertiary_runner_wrapper(
-            "circle_power2_B0.99_mapping",
-            source_image,
-            output_size_option,
-            transformations::square_to_circle::power2,
-            0.99,
+            i,
         );
     }
 
@@ -233,4 +193,13 @@ pub fn run_all_half_face_superellipse<P, Container>(
     );
 
     //p-Norm Squircular
+}
+
+fn step_maker(step_count: u32) -> Vec<f64>{
+    let step_distance = 1.0 / step_count as f64;
+    let mut steps: Vec<f64> = vec![];
+    for i in 0..=step_count {
+        steps.push(i as f64 * step_distance);
+    }
+    return steps;
 }
