@@ -204,6 +204,12 @@ pub fn run_all_half_face_superellipse(
     //Simple Stretch Secondary
 
     //Lamé-based
+    basic_runner_wrapper(
+        "superellipse_lame-based",
+        source_image.clone(),
+        output_size_option,
+        transformations::half_face_superellipse::lame,
+    );
 
     //p-Norm Squircular
 }

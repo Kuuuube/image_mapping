@@ -47,5 +47,8 @@ pub fn elliptical_grid(point: transformer::Point) -> transformer::Point {
 //Simple Stretch Secondary
 
 //Lamé-based
+pub fn lame(point: transformer::Point) -> transformer::Point {
+    return superellipse_wrapper(point, super::square_to_circle::lame);
+}
 
 //p-Norm Squircular
