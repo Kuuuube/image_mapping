@@ -1,12 +1,11 @@
 pub fn transform_image<F>(
-    image: image::DynamicImage,
+    source_image: &image::ImageBuffer<image::Rgba<u8>, Vec<u8>>,
     output_size_option: Option<Size>,
     mut transformation: F,
 ) -> image::ImageBuffer<image::Rgba<u8>, Vec<u8>>
 where
     F: FnMut(Point) -> Point,
 {
-    let source_image = image.into_rgba8();
     let source_size = Size {
         width: source_image.width(),
         height: source_image.height(),
@@ -45,8 +44,7 @@ where
             continue;
         }
 
-        let output_pixel = output_image.get_pixel_mut(real_point.x, real_point.y);
-        *output_pixel = rgba.clone();
+        *output_image.get_pixel_mut(real_point.x, real_point.y) = *rgba;
     }
 
     return output_image;
