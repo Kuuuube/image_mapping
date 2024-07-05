@@ -174,3 +174,36 @@ pub fn run_all_circle_to_square(
 
     //p-Norm Squircular
 }
+
+pub fn run_all_half_face_superellipse(
+    source_image: image::DynamicImage,
+    output_size_option: Option<Size>,
+) {
+    //FG-Squircular
+
+    //FG-Squircular Secondary
+
+    //FG-Squircular Tertiary
+
+    //FG-Squircular Quaternary
+
+    //Elliptical Grid
+    basic_runner_wrapper(
+        "superellipse_elliptical_grid",
+        source_image.clone(),
+        output_size_option,
+        transformations::half_face_superellipse::elliptical_grid,
+    );
+
+    //Elliptical Grid Secondary
+
+    //Elliptical Grid Tertiary
+
+    //Simple Stretch
+
+    //Simple Stretch Secondary
+
+    //Lamé-based
+
+    //p-Norm Squircular
+}
