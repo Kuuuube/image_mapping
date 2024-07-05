@@ -3,8 +3,6 @@ mod transformations;
 mod transformer;
 
 fn main() {
-    let start_time = std::time::Instant::now();
-
     let source_image = image::open("source.png").unwrap();
 
     run_batches(
@@ -14,12 +12,18 @@ fn main() {
             height: 2000,
         },
     );
-
-    println!("Generated in: {}ms", start_time.elapsed().as_millis());
 }
 
 fn run_batches(source_image: image::DynamicImage, batch_size: transformer::Size) {
+    let start_time = std::time::Instant::now();
     batch_runners::run_all_circle_to_square(source_image.clone(), Some(batch_size));
+    println!("Generated circle to square batch in: {}ms", start_time.elapsed().as_millis());
+
+    let start_time = std::time::Instant::now();
     batch_runners::run_all_square_to_circle(source_image.clone(), Some(batch_size));
+    println!("Generated square to circle batch in: {}ms", start_time.elapsed().as_millis());
+
+    let start_time = std::time::Instant::now();
     batch_runners::run_all_half_face_superellipse(source_image.clone(), Some(batch_size));
+    println!("Generated half face superellipse batch in: {}ms", start_time.elapsed().as_millis());
 }
