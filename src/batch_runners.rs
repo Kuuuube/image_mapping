@@ -71,6 +71,12 @@ pub fn run_all_square_to_circle<P, Container>(
     let tertiary_steps = step_maker(5);
 
     //FG-Squircular
+    basic_runner_wrapper(
+        "circle_fg_squircular",
+        source_image,
+        output_size_option,
+        transformations::square_to_circle::fg_squircular,
+    );
 
     //FG-Squircular Secondary
 
@@ -124,6 +130,12 @@ pub fn run_all_circle_to_square<P, Container>(
     Container: std::ops::Deref<Target = [P::Subpixel]>,
 {
     //FG-Squircular
+    basic_runner_wrapper(
+        "square_fg_squircular",
+        source_image,
+        output_size_option,
+        transformations::circle_to_square::fg_squircular,
+    );
 
     //FG-Squircular Secondary
 
@@ -161,6 +173,12 @@ pub fn run_all_half_face_superellipse<P, Container>(
     Container: std::ops::Deref<Target = [P::Subpixel]>,
 {
     //FG-Squircular
+    basic_runner_wrapper(
+        "superellipse_fg_squircular",
+        source_image,
+        output_size_option,
+        transformations::half_face_superellipse::fg_squircular,
+    );
 
     //FG-Squircular Secondary
 
@@ -195,7 +213,7 @@ pub fn run_all_half_face_superellipse<P, Container>(
     //p-Norm Squircular
 }
 
-fn step_maker(step_count: u32) -> Vec<f64>{
+fn step_maker(step_count: u32) -> Vec<f64> {
     let step_distance = 1.0 / step_count as f64;
     let mut steps: Vec<f64> = vec![];
     for i in 0..=step_count {

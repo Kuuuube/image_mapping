@@ -26,6 +26,9 @@ where
 }
 
 //FG-Squircular
+pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
+    return superellipse_wrapper(point, super::square_to_circle::fg_squircular);
+}
 
 //FG-Squircular Secondary
 

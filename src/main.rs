@@ -2,6 +2,8 @@ mod batch_runners;
 mod transformations;
 mod transformer;
 
+const EPSILON: f64 = 0.00001;
+
 fn main() {
     let source_image = image::open("source.png").unwrap().into_rgba8();
 

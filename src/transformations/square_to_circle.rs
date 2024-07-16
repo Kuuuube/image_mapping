@@ -1,16 +1,29 @@
-use crate::transformer;
+use crate::{transformer, EPSILON};
 
 //FG-Squircular
+pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
+    if f64::abs(point.y) < EPSILON || f64::abs(point.x) < EPSILON {
+        return point;
+    }
+
+    let x = point.x;
+    let y = point.y;
+
+    let x2 = f64::powi(x, 2);
+    let y2 = f64::powi(y, 2);
+
+    return transformer::Point {
+        x: ((x * f64::sqrt(x2 + y2 - x2 * y2)) / (f64::sqrt(x2 + y2))),
+        y: ((y * f64::sqrt(x2 + y2 - x2 * y2)) / (f64::sqrt(x2 + y2))),
+    };
+}
 
 //FG-Squircular Secondary
 
 //FG-Squircular Tertiary
 pub fn power2(point: transformer::Point, b: f64) -> transformer::Point {
-    if f64::abs(point.y) < 0.00001 || f64::abs(point.x) < 0.00001 {
-        return transformer::Point {
-            x: point.x,
-            y: point.y,
-        };
+    if f64::abs(point.y) < EPSILON || f64::abs(point.x) < EPSILON {
+        return point;
     }
 
     let x2 = f64::powi(point.x, 2);
