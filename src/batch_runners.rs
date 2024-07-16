@@ -68,7 +68,7 @@ pub fn run_all_square_to_circle<P, Container>(
     [P::Subpixel]: image::EncodableLayout,
     Container: std::ops::Deref<Target = [P::Subpixel]>,
 {
-    let tertiary_steps = step_maker(100);
+    let tertiary_steps = step_maker(5);
 
     //FG-Squircular
 
