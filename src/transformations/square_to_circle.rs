@@ -19,6 +19,22 @@ pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
 }
 
 //FG-Squircular Secondary
+pub fn tapered_1_5(point: transformer::Point) -> transformer::Point {
+    if f64::abs(point.y) < EPSILON || f64::abs(point.x) < EPSILON {
+        return point;
+    }
+
+    let x = point.x;
+    let y = point.y;
+
+    let x2 = f64::powi(point.x, 2);
+    let y2 = f64::powi(point.y, 2);
+
+    return transformer::Point {
+        y: ((x / f64::sqrt(x2 + y2)) * ((x2 * y2) + f64::sqrt(f64::powi(x2 * y2, 2) - 3.0 * (x2 * y2) + f64::powi(f64::sqrt(x2 + y2), 2)))),
+        x: ((y / f64::sqrt(x2 + y2)) * ((x2 * y2) + f64::sqrt(f64::powi(x2 * y2, 2) - 3.0 * (x2 * y2) + f64::powi(f64::sqrt(x2 + y2), 2)))),
+    };
+}
 
 //FG-Squircular Tertiary
 pub fn power2(point: transformer::Point, b: f64) -> transformer::Point {

@@ -31,6 +31,9 @@ pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
 }
 
 //FG-Squircular Secondary
+pub fn tapered_1_5(point: transformer::Point) -> transformer::Point {
+    return superellipse_wrapper(point, super::square_to_circle::tapered_1_5);
+}
 
 //FG-Squircular Tertiary
 
