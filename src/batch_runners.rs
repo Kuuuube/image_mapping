@@ -79,6 +79,13 @@ pub fn run_all_square_to_circle<P, Container>(
     );
 
     //FG-Squircular Secondary
+    //Tapered 1.5
+    basic_runner_wrapper(
+        "circle_tapered_1_5",
+        source_image,
+        output_size_option,
+        transformations::square_to_circle::tapered_1_5,
+    );
 
     //FG-Squircular Tertiary
     //Power2
@@ -138,6 +145,13 @@ pub fn run_all_circle_to_square<P, Container>(
     );
 
     //FG-Squircular Secondary
+    //Tapered 1.5
+    basic_runner_wrapper(
+        "square_tapered_1_5",
+        source_image,
+        output_size_option,
+        transformations::circle_to_square::tapered_1_5,
+    );
 
     //FG-Squircular Tertiary
 
@@ -181,6 +195,13 @@ pub fn run_all_half_face_superellipse<P, Container>(
     );
 
     //FG-Squircular Secondary
+    //Tapered 1.5
+    basic_runner_wrapper(
+        "tapered_1_5",
+        source_image,
+        output_size_option,
+        transformations::half_face_superellipse::tapered_1_5,
+    );
 
     //FG-Squircular Tertiary
 
