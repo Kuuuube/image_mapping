@@ -3,7 +3,7 @@ use crate::{
     transformer::{self, Point, Size},
 };
 
-fn basic_runner_wrapper<P, Container, F>(
+pub fn basic_runner_wrapper<P, Container, F>(
     mapping_name: &str,
     source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
@@ -21,7 +21,7 @@ fn basic_runner_wrapper<P, Container, F>(
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
-fn tertiary_runner_wrapper<P, Container, F>(
+pub fn tertiary_runner_wrapper<P, Container, F>(
     mapping_name: &str,
     source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
@@ -40,7 +40,7 @@ fn tertiary_runner_wrapper<P, Container, F>(
     .expect(&format!("Failed to generate {}", mapping_name));
 }
 
-fn quaternary_runner_wrapper<P, Container, F>(
+pub fn quaternary_runner_wrapper<P, Container, F>(
     mapping_name: &str,
     source_image: &image::ImageBuffer<P, Container>,
     output_size_option: Option<Size>,
