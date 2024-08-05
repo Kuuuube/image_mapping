@@ -12,10 +12,7 @@ pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
     let u2 = f64::powi(u, 2);
     let v2 = f64::powi(v, 2);
 
-    let absu = f64::abs(u);
-    let absv = f64::abs(v);
-
-    let sgnuv = (absu * absv) / (u * v);
+    let sgnuv = f64::signum(u * v);
 
     let usqrttwo = u * f64::sqrt(2.0);
     let vsqrttwo = v * f64::sqrt(2.0);
@@ -72,8 +69,8 @@ pub fn lame(point: transformer::Point) -> transformer::Point {
     let absu = f64::abs(u);
     let absv = f64::abs(v);
 
-    let sgnu = absu / u;
-    let sgnv = absv / v;
+    let sgnu = f64::signum(u);
+    let sgnv = f64::signum(v);
 
     return transformer::Point {
         x: (sgnu * f64::powf(absu, 1.0 - u2 - v2)),
