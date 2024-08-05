@@ -31,8 +31,16 @@ pub fn tapered_1_5(point: transformer::Point) -> transformer::Point {
     let y2 = f64::powi(point.y, 2);
 
     return transformer::Point {
-        y: ((x / f64::sqrt(x2 + y2)) * ((x2 * y2) + f64::sqrt(f64::powi(x2 * y2, 2) - 3.0 * (x2 * y2) + f64::powi(f64::sqrt(x2 + y2), 2)))),
-        x: ((y / f64::sqrt(x2 + y2)) * ((x2 * y2) + f64::sqrt(f64::powi(x2 * y2, 2) - 3.0 * (x2 * y2) + f64::powi(f64::sqrt(x2 + y2), 2)))),
+        y: ((x / f64::sqrt(x2 + y2))
+            * ((x2 * y2)
+                + f64::sqrt(
+                    f64::powi(x2 * y2, 2) - 3.0 * (x2 * y2) + f64::powi(f64::sqrt(x2 + y2), 2),
+                ))),
+        x: ((y / f64::sqrt(x2 + y2))
+            * ((x2 * y2)
+                + f64::sqrt(
+                    f64::powi(x2 * y2, 2) - 3.0 * (x2 * y2) + f64::powi(f64::sqrt(x2 + y2), 2),
+                ))),
     };
 }
 

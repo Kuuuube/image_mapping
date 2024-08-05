@@ -39,8 +39,28 @@ pub fn tapered_1_5(point: transformer::Point) -> transformer::Point {
     let sgnv = f64::signum(v);
 
     return transformer::Point {
-        x: (sgnu * f64::sqrt(((1.0 + (u2 / v2)) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2)))) - f64::sqrt(f64::powi((1.0 + (u2 / v2)) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2))), 2) - (u2 / v2) * (f64::powi(f64::sqrt(u2 + v2), 2) / (3.0 - 2.0 * f64::sqrt(u2 + v2)))))),
-        y: (sgnv * f64::sqrt(((1.0 + (1.0 / (u2 / v2))) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2)))) - f64::sqrt(f64::powi((1.0 + (1.0 / (u2 / v2))) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2))), 2) - (1.0 / (u2 / v2)) * (f64::powi(f64::sqrt(u2 + v2), 2) / (3.0 - 2.0 * f64::sqrt(u2 + v2)))))),
+        x: (sgnu
+            * f64::sqrt(
+                ((1.0 + (u2 / v2)) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2))))
+                    - f64::sqrt(
+                        f64::powi(
+                            (1.0 + (u2 / v2)) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2))),
+                            2,
+                        ) - (u2 / v2)
+                            * (f64::powi(f64::sqrt(u2 + v2), 2) / (3.0 - 2.0 * f64::sqrt(u2 + v2))),
+                    ),
+            )),
+        y: (sgnv
+            * f64::sqrt(
+                ((1.0 + (1.0 / (u2 / v2))) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2))))
+                    - f64::sqrt(
+                        f64::powi(
+                            (1.0 + (1.0 / (u2 / v2))) / (2.0 * (3.0 - 2.0 * f64::sqrt(u2 + v2))),
+                            2,
+                        ) - (1.0 / (u2 / v2))
+                            * (f64::powi(f64::sqrt(u2 + v2), 2) / (3.0 - 2.0 * f64::sqrt(u2 + v2))),
+                    ),
+            )),
     };
 }
 
