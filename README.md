@@ -31,4 +31,22 @@ Rust: https://www.rust-lang.org/tools/install
     }
     ```
 
+- To run a mapping with your own custom arbitrary transformation:
+
+    ```rust
+    fn main() {
+        let source_image = image::open("source.png").unwrap().into_rgba8();
+        let output_size = transformer::Size { width: 2000, height: 2000, };
+        transformer::transform_image(&source_image, Some(output_size), |point| {
+            awesome_transformation_function(point)
+        })
+        .save(&format!("output/{}.png", "awesome_transformation"))
+        .expect(&format!("Failed to generate {}", "awesome_transformation"));
+    }
+
+    fn awesome_transformation_function(point: transformer::Point) -> transformer::Point {
+        return transformer::Point { x: point.x * 2.0, y: point.y * 2.0 };
+    }
+    ```
+
 - With some mappings can end up with "holes" leftover from the stretching. Scaling the output size of the image down a bit can help alleviate this.
