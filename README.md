@@ -37,11 +37,12 @@ Rust: https://www.rust-lang.org/tools/install
     fn main() {
         let source_image = image::open("source.png").unwrap().into_rgba8();
         let output_size = transformer::Size { width: 2000, height: 2000, };
-        transformer::transform_image(&source_image, Some(output_size), |point| {
-            awesome_transformation_function(point)
-        })
-        .save(&format!("output/{}.png", "awesome_transformation"))
-        .expect(&format!("Failed to generate {}", "awesome_transformation"));
+        batch_runners::basic_runner_wrapper(
+            "awesome_transformation", // This controls the output filename. You can set this to anything you want.
+            &source_image,
+            Some(output_size), // Set to `None` to use the source image's size as the output size.
+            awesome_transformation_function, // Put any function here that takes in a `transformer::Point` and returns a `transformer::Point`.
+        );
     }
 
     fn awesome_transformation_function(point: transformer::Point) -> transformer::Point {
