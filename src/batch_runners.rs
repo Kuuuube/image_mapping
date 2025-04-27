@@ -258,7 +258,7 @@ pub fn run_all_half_face_superellipse<P, Container>(
     );
 }
 
-fn step_maker(step_count: u32) -> Vec<f64> {
+pub fn step_maker(step_count: u32) -> Vec<f64> {
     let step_distance = 1.0 / step_count as f64;
     let mut steps: Vec<f64> = vec![];
     for i in 0..=step_count {
