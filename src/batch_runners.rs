@@ -125,8 +125,6 @@ pub fn run_all_square_to_circle<P, Container>(
         transformations::square_to_circle::lame,
     );
 
-    //p-Norm Squircular
-
     //Schwarz Christoffel
     basic_runner_wrapper(
         "circle_schwarz-christoffel",

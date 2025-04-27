@@ -108,8 +108,6 @@ pub fn lame(point: transformer::Point) -> transformer::Point {
     };
 }
 
-//p-Norm Squircular
-
 //Schwarz Christoffel
 pub fn schwarz_christoffel(point: transformer::Point) -> transformer::Point {
     let k = 1.854074677301371918433850347195260046217598823521766905586;
