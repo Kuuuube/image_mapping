@@ -99,6 +99,28 @@ pub fn lame(point: transformer::Point) -> transformer::Point {
 }
 
 //p-Norm Squircular
+pub fn p_norm_squircular(point: transformer::Point, m: f64) -> transformer::Point {
+    if f64::abs(point.x) < EPSILON || f64::abs(point.y) < EPSILON {
+        return point;
+    }
+
+    let u = point.x;
+    let v = point.y;
+
+    let u2 = f64::powi(u, 2);
+    let v2 = f64::powi(v, 2);
+
+    let absu = f64::abs(u);
+    let absv = f64::abs(v);
+
+    let sgnu = absu / u;
+    let sgnv = absv / v;
+
+    return transformer::Point {
+        x: ((sgnu * f64::sqrt(u2 + v2)) / (f64::powf(1.0 + f64::powf(f64::abs(v / u), 2.0 / (1.0 - f64::powf(f64::sqrt(u2 + v2), m))), 1.0 / (2.0 / (1.0 - f64::powf(f64::sqrt(u2 + v2), m)))))),
+        y: ((sgnv * f64::sqrt(u2 + v2)) / (f64::powf(1.0 + f64::powf(f64::abs(u / v), 2.0 / (1.0 - f64::powf(f64::sqrt(u2 + v2), m))), 1.0 / (2.0 / (1.0 - f64::powf(f64::sqrt(u2 + v2), m)))))),
+    };
+}
 
 //Schwarz Christoffel
 pub fn schwarz_christoffel(point: transformer::Point) -> transformer::Point {
