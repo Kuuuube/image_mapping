@@ -126,6 +126,14 @@ pub fn run_all_square_to_circle<P, Container>(
     );
 
     //p-Norm Squircular
+
+    //Schwarz Christoffel
+    basic_runner_wrapper(
+        "circle_schwarz-christoffel",
+        source_image,
+        output_size_option,
+        transformations::square_to_circle::schwarz_christoffel,
+    );
 }
 
 pub fn run_all_circle_to_square<P, Container>(
@@ -176,6 +184,14 @@ pub fn run_all_circle_to_square<P, Container>(
     );
 
     //p-Norm Squircular
+
+    //Schwarz Christoffel
+    basic_runner_wrapper(
+        "square_schwarz-christoffel",
+        source_image,
+        output_size_option,
+        transformations::circle_to_square::schwarz_christoffel,
+    );
 }
 
 pub fn run_all_half_face_superellipse<P, Container>(
@@ -232,6 +248,14 @@ pub fn run_all_half_face_superellipse<P, Container>(
     );
 
     //p-Norm Squircular
+
+    //Schwarz Christoffel
+    basic_runner_wrapper(
+        "superellipse_schwarz-christoffel",
+        source_image,
+        output_size_option,
+        transformations::half_face_superellipse::schwarz_christoffel,
+    );
 }
 
 fn step_maker(step_count: u32) -> Vec<f64> {
