@@ -58,3 +58,8 @@ pub fn lame(point: transformer::Point) -> transformer::Point {
 }
 
 //p-Norm Squircular
+
+//Schwarz Christoffel
+pub fn schwarz_christoffel(point: transformer::Point) -> transformer::Point {
+    return superellipse_wrapper(point, super::square_to_circle::schwarz_christoffel);
+}

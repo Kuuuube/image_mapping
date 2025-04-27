@@ -86,3 +86,53 @@ pub fn landen_elliptic_f(input_phi: f64) -> f64 {
     phi /= (longlong1 << i) as f64;
     return phi / g;
 }
+
+fn agm_jacobi_sn_cn_dn(u: f64, sn: &mut f64, cn: &mut f64, dn: &mut f64) {
+    const MAX_ITER: usize = 64;
+    let mut a: [f64; MAX_ITER + 1] = [0.0; MAX_ITER + 1];
+    let mut g: [f64; MAX_ITER + 1] = [0.0; MAX_ITER + 1];
+    let mut c: [f64; MAX_ITER + 1] = [0.0; MAX_ITER + 1];
+    a[0] = 1.0;
+    g[0] = (1.0/2.0_f64).sqrt();
+    c[0] = (1.0/2.0_f64).sqrt();
+    let mut i: usize = 0;
+    loop {
+        a[i + 1] = 0.5 * (a[i] + g[i]);
+        g[i + 1] = (a[i] * g[i]).sqrt();
+        c[i + 1] = 0.5 * (a[i] - g[i]);
+        i += 1;
+        if !(i < MAX_ITER && f64::abs(a[i]-g[i]) > std::f64::EPSILON) {
+            break;
+        }
+    }
+
+    if i == MAX_ITER {
+        dbg!("WARNING: max iterations in myown_jacobi_sn_cn_dn()");
+    }
+
+    let longlong1: i128 = 1;
+    let mut phi: f64 = (longlong1 << i) as f64 * a[i] * u;
+    while i > 0 {
+        phi = 0.5 * (phi + f64::asin(c[i] * f64::sin(phi) / a[i]));
+        i -= 1;
+    }
+
+    *sn = f64::sin(phi);
+    *cn = f64::cos(phi);
+    *dn = (1.0 - 0.5 * (*sn * *sn)).sqrt();
+}
+
+pub fn ccn(re: f64, im: f64, ret_re: &mut f64, ret_im: &mut f64) {
+    let mut sn_re: f64 = Default::default();
+    let mut cn_re: f64 = Default::default();
+    let mut dn_re: f64 = Default::default();
+    let mut sn_im: f64 = Default::default();
+    let mut cn_im: f64 = Default::default();
+    let mut dn_im: f64 = Default::default();
+
+    agm_jacobi_sn_cn_dn(re, &mut sn_re, &mut cn_re, &mut dn_re);
+    agm_jacobi_sn_cn_dn(im, &mut sn_im, &mut cn_im, &mut dn_im);
+    let t = 1.0 - dn_re * dn_re * sn_im * sn_im;
+    *ret_re = cn_re * cn_im / t;
+    *ret_im = - sn_re * dn_re * sn_im * dn_im / t;
+}

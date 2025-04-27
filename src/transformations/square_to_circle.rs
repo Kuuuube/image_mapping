@@ -1,4 +1,4 @@
-use crate::{transformer, EPSILON};
+use crate::{transformer, EPSILON, math};
 
 //FG-Squircular
 pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
@@ -109,3 +109,19 @@ pub fn lame(point: transformer::Point) -> transformer::Point {
 }
 
 //p-Norm Squircular
+
+//Schwarz Christoffel
+pub fn schwarz_christoffel(point: transformer::Point) -> transformer::Point {
+    let k = 1.854074677301371918433850347195260046217598823521766905586;
+    // Rotate by 45 deg and keep the square inside [-1,+1]^2
+    let z_re: f64 = point.x / 2.0 - point.y / 2.0;
+    let z_im: f64 = point.x / 2.0 + point.y / 2.0;
+    // Map z to unit disk
+    let mut ru: f64 = Default::default();
+    let mut rv: f64 = Default::default();
+    math::schwarz_christoffel::ccn(k * (1.0 - z_re), - k * z_im, &mut ru, &mut rv);
+    return transformer::Point {
+        x: (ru + rv) * (1.0/2.0_f64).sqrt(),
+        y: (rv - ru) * (1.0/2.0_f64).sqrt(),
+    };
+}
