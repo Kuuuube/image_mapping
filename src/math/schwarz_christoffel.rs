@@ -58,7 +58,7 @@
 pub fn landen_elliptic_f(input_phi: f64) -> f64 {
     let mut phi = input_phi;
     let mut a: f64 = 1.0;
-    let mut g: f64 = (1.0/2.0_f64).sqrt();
+    let mut g: f64 = (1.0 / 2.0_f64).sqrt();
     let mut last_a: f64;
     let mut last_g: f64;
     let mut tan_2n_phi: f64;
@@ -93,15 +93,15 @@ fn agm_jacobi_sn_cn_dn(u: f64, sn: &mut f64, cn: &mut f64, dn: &mut f64) {
     let mut g: [f64; MAX_ITER + 1] = [0.0; MAX_ITER + 1];
     let mut c: [f64; MAX_ITER + 1] = [0.0; MAX_ITER + 1];
     a[0] = 1.0;
-    g[0] = (1.0/2.0_f64).sqrt();
-    c[0] = (1.0/2.0_f64).sqrt();
+    g[0] = (1.0 / 2.0_f64).sqrt();
+    c[0] = (1.0 / 2.0_f64).sqrt();
     let mut i: usize = 0;
     loop {
         a[i + 1] = 0.5 * (a[i] + g[i]);
         g[i + 1] = (a[i] * g[i]).sqrt();
         c[i + 1] = 0.5 * (a[i] - g[i]);
         i += 1;
-        if !(i < MAX_ITER && f64::abs(a[i]-g[i]) > std::f64::EPSILON) {
+        if !(i < MAX_ITER && f64::abs(a[i] - g[i]) > std::f64::EPSILON) {
             break;
         }
     }
@@ -134,5 +134,5 @@ pub fn ccn(re: f64, im: f64, ret_re: &mut f64, ret_im: &mut f64) {
     agm_jacobi_sn_cn_dn(im, &mut sn_im, &mut cn_im, &mut dn_im);
     let t = 1.0 - dn_re * dn_re * sn_im * sn_im;
     *ret_re = cn_re * cn_im / t;
-    *ret_im = - sn_re * dn_re * sn_im * dn_im / t;
+    *ret_im = -sn_re * dn_re * sn_im * dn_im / t;
 }

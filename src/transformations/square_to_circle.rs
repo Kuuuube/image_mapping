@@ -1,4 +1,4 @@
-use crate::{transformer, EPSILON, math};
+use crate::{math, transformer, EPSILON};
 
 //FG-Squircular
 pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
@@ -119,9 +119,9 @@ pub fn schwarz_christoffel(point: transformer::Point) -> transformer::Point {
     // Map z to unit disk
     let mut ru: f64 = Default::default();
     let mut rv: f64 = Default::default();
-    math::schwarz_christoffel::ccn(k * (1.0 - z_re), - k * z_im, &mut ru, &mut rv);
+    math::schwarz_christoffel::ccn(k * (1.0 - z_re), -k * z_im, &mut ru, &mut rv);
     return transformer::Point {
-        x: (ru + rv) * (1.0/2.0_f64).sqrt(),
-        y: (rv - ru) * (1.0/2.0_f64).sqrt(),
+        x: (ru + rv) * (1.0 / 2.0_f64).sqrt(),
+        y: (rv - ru) * (1.0 / 2.0_f64).sqrt(),
     };
 }

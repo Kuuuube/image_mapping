@@ -1,8 +1,8 @@
 mod batch_runners;
+mod math;
 mod test;
 mod transformations;
 mod transformer;
-mod math;
 
 const EPSILON: f64 = 0.00001;
 

@@ -1,4 +1,4 @@
-use crate::{transformer, EPSILON, math};
+use crate::{math, transformer, EPSILON};
 
 //FG-Squircular
 pub fn fg_squircular(point: transformer::Point) -> transformer::Point {
@@ -106,17 +106,18 @@ pub fn schwarz_christoffel(point: transformer::Point) -> transformer::Point {
     let u = point.x;
     let v = point.y;
 
-    let ru: f64 = (u - v) * (1.0/2.0_f64).sqrt();
-    let rv: f64 = (u + v) * (1.0/2.0_f64).sqrt();
+    let ru: f64 = (u - v) * (1.0 / 2.0_f64).sqrt();
+    let rv: f64 = (u + v) * (1.0 / 2.0_f64).sqrt();
     let a_big: f64 = ru * ru + rv * rv;
     let b_big: f64 = ru * ru - rv * rv;
     let u_big: f64 = 1.0 + 2.0 * b_big - a_big * a_big;
-    let t_big: f64 = ((1.0 + a_big * a_big) * (1.0 + a_big * a_big) - 4.0 * b_big  * b_big).sqrt();
+    let t_big: f64 = ((1.0 + a_big * a_big) * (1.0 + a_big * a_big) - 4.0 * b_big * b_big).sqrt();
     let cos_a: f64 = (2.0 * a_big - t_big) / u_big;
     let cos_b: f64 = u_big / (2.0 * a_big + t_big);
     let a: f64 = f64::acos(f64::min(f64::max(cos_a, -1.0), 1.0));
     let b: f64 = f64::acos(f64::min(f64::max(cos_b, -1.0), 1.0));
-    let rx: f64 = f64::signum(ru) * (1.0 - math::schwarz_christoffel::landen_elliptic_f(a) / (2.0 * k));
+    let rx: f64 =
+        f64::signum(ru) * (1.0 - math::schwarz_christoffel::landen_elliptic_f(a) / (2.0 * k));
     let ry: f64 = f64::signum(rv) * (math::schwarz_christoffel::landen_elliptic_f(b) / (2.0 * k));
     return transformer::Point {
         x: rx + ry,
