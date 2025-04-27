@@ -79,7 +79,7 @@ pub fn landen_elliptic_f(input_phi: f64) -> f64 {
     }
 
     if i == MAX_ITER {
-        dbg!("WARNING: max iterations in landen_elliptic_F()");
+        dbg!("WARNING: max iterations in landen_elliptic_f()");
     }
 
     let longlong1: i128 = 1;
@@ -107,7 +107,7 @@ fn agm_jacobi_sn_cn_dn(u: f64) -> (f64, f64, f64) {
     }
 
     if i == MAX_ITER {
-        dbg!("WARNING: max iterations in myown_jacobi_sn_cn_dn()");
+        dbg!("WARNING: max iterations in agm_jacobi_sn_cn_dn()");
     }
 
     let longlong1: i128 = 1;
