@@ -182,7 +182,7 @@ pub fn run_all_circle_to_square<P, Container>(
     );
 
     //p-Norm Squircular
-    let p_norm_steps = vec![0.01, 0.1, 0.5, 1.0, 5.0, 10.0]; // p-norm accepts all values >0, these steps give a decent preview
+    let p_norm_steps = vec![0.01, 0.1, 0.5, 1.0, 5.0, 10.0, 100.0]; // p-norm accepts all values >0, these steps give a decent preview
     for i in p_norm_steps {
         tertiary_runner_wrapper(
             &format!("circle_p-norm_squircular_{:.2}_mapping", i),
